@@ -1,0 +1,182 @@
+.navbar{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 50px;
+  gap: 20px;
+  background-color: #213547;
+
+}
+
+/* --- Header & Card (No change needed here for the scroll) --- */
+.header{
+  height: 100vh;
+  width: 100vw;
+  background: url("/Mis\ herramientas.jpg");
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  position: relative;
+}
+
+.video-background{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* This ensures the video covers the entire container, cropping if necessary */
+  object-fit: cover;
+}
+
+.h1{
+  padding-top: 10px;
+  font-family: "GFS Didot", serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 16vw;
+  z-index: 1;
+}
+
+.card{
+  height: 150px;
+  width: 100px;
+  border-radius: 10px;
+  z-index: 10;
+}
+
+/* ----------------------------------------------------------------- */
+
+
+
+/* 1. Establish the 3D space and center the carousel */
+.carousel-container {
+  /* Center the carousel in the container */
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 100px;
+  height: 250px; /* Give it enough height to view the rotation */
+
+  /* CRUCIAL: This forces the container into the 3D rendering context of its parent */
+  transform: translateZ(0px);
+}
+
+/* 2. The Rotating Axis */
+.carousel-axis {
+  position: relative;
+  /* Maintain 3D context for children */
+  transform-style: preserve-3d;
+  width: 100px; /* Base width */
+  height: 150px; /* Base height */
+}
+
+.carousel-axis-r{
+   /* Apply the infinite rotation animation */
+  animation: rotate-carousel-r 60s linear infinite;
+}
+
+@keyframes rotate-carousel-r {
+  /* Rotates infinitely around the Y-axis (vertical) */
+  from { transform: rotateX(-16deg)  rotateY(0deg); }
+  to { transform: rotateX(-16deg)  rotateY(360deg); }
+}
+
+.carousel-axis-l{
+   /* Apply the infinite rotation animation */
+  animation: rotate-carousel-l 60s linear infinite;
+}
+
+@keyframes rotate-carousel-l {
+  /* Rotates infinitely around the Y-axis (vertical) */
+  from { transform: rotateX(-16deg)  rotateY(360deg); }
+  to { transform: rotateX(-16deg)  rotateY(0deg); }
+}
+
+/* 3. Positioning the Cards */
+.carousel-axis .card {
+  /* CRUCIAL: Position all cards in the same spot, then apply rotation/translation */
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  
+  /* Reset flex properties that conflict with absolute positioning */
+  flex-shrink: initial; 
+  
+  /* Calculate the rotation angle (var(--i) is the index) */
+  /* Calculate the forward translation (Radius R, defined by sight) */
+  transform: 
+    rotateY(calc(var(--i) * (360deg / var(--total))))
+    translateZ(350px); /* Adjust this value (Radius R) */
+}
+
+.hanger-scene {
+    position: relative; /* Context for the absolute post */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    /* You must define a height that encompasses all three carousels and their spacing */
+    height: max-content; /* Adjust this height based on the total space needed for 3 rows */
+    padding-top: 50px; /* Give some space above the first row */
+
+    /* Make this the 3D space for the post and carousels */
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+/* --- 2. The Static Center Post --- */
+.static-hanger-post {
+    position: absolute;
+    top: 0;
+    left: 45%; /* Center it horizontally */
+    
+    /* Span the height of the entire scene */
+    height: 100%; 
+    width: 20px; 
+    background: #213547;
+    border-radius: 10px; /* Gives it the cylinder look */
+    /* It needs to be visually placed in the center of the rotating space. */
+    /* Use a high positive translateZ to make it appear in the foreground */
+    transform: rotateY(calc(var(--i) * (360deg / var(--total)))); /* Adjust 0px */
+    padding-bottom: 100px;
+}
+
+.hanger-arm {
+    position: absolute;
+    /* Dimensions for the arm */
+    height: 3px; 
+    width: 350px; /* Width must match the translateZ of the cards */
+    background:  #213547; /* Dark blue
+    
+    /* Place the pivot point (left edge) at the center of the axis */
+    left: 50%; 
+    top: 50%;
+    
+    /* Shift the arm's pivot point and then apply 3D transformation */
+    /* Origin is moved to the center of the post (left edge of the arm) */
+    transform-origin: 0 50%; 
+    
+    /* Apply the transformation (This rotates and extends the arm) */
+    /* NOTE: We only need to use rotateY here, no translateZ! */
+    transform: 
+        /* 1. Rotate to the correct radial angle */
+        rotateY(calc(var(--i) * (360deg / var(--total))));
+}
+
+@media (max-width: 768px){
+  .header{
+    height: 35vh
+  }
+  .carousel-axis .card{
+    transform: rotateY(calc(var(--i) * (360deg / var(--total))))
+    translateZ(250px);
+  }
+  .hanger-arm{
+    width: 250px;
+  }
+}
