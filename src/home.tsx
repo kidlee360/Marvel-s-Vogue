@@ -6,6 +6,7 @@ import SplitText from "gsap/SplitText";
 import './App.css';
 import Catalogue from './components/catalogue.tsx';
 import Contact from './components/contact.tsx';
+import UG from './components/UG.tsx';
 
 export default function Home(){
 

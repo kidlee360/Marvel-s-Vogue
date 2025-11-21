@@ -169,6 +169,22 @@
         rotateY(calc(var(--i) * (360deg / var(--total))));
 }
 
+.UG{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+  cursor: pointer;
+  height: 300px;
+  width: 300px;
+  border-radius: 30px;
+  background-color: rgba(197, 7, 32, 0.3);
+  backdrop-filter: blur(10px);
+  align-items: center;
+}
+
+
+
 @media (max-width: 768px){
   .header{
     height: 35vh
