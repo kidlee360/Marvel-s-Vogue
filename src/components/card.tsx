@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect} from 'react';
-import './App.css'; 
-import Portal from './portal'; // <-- Import the new Portal component
+import '../App.css'; 
+import Portal from '../portal'; // <-- Import the new Portal component
 import { CSSProperties } from 'react'; // Optional: for strict CSS style typing
 
 interface CardProps {

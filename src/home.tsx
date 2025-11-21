@@ -1,19 +1,14 @@
 import { useState } from 'react';
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitText from "gsap/SplitText";
 import './App.css';
-import Card from './card.tsx';
+import Catalogue from './components/catalogue.tsx';
+import Contact from './components/contact.tsx';
 
 export default function Home(){
-  const imageNames =["image (1).jpg", "image (2).jpg", "image (3).jpg", "image (4).jpg", "image (5).jpg", "image (6).jpg", "image (7).jpg", "image (8).jpg", "image (9).jpg", "image (10).jpg", "image (11).jpg", "image (12).jpg", "image (13).jpg", "image (14).jpg", "image (15).jpg", "image (16).jpg", "image (17).jpg", "image (18).jpg", "image (19).jpg", "image (20).jpg", "image (21).jpg", "image (22).jpg", "image (23).jpg", "image (24).jpg", "image (25).jpg", "image (26).jpg", "image (27).jpg", "image (28).jpg", "image (29).jpg", "image (30).jpg", "image (31).jpg", "image (32).jpg", "image (33).jpg", "image (34).jpg", "image (35).jpg", "image (36).jpg", "image (37).jpg", "image (38).jpg", "image (39).jpg", "image (40).jpg", "image (41).jpg", "image (42).jpg", "image (43).jpg", "image (44).jpg", "image (45).jpg", "image (46).jpg", "image (47).jpg", "image (48).jpg", "image (49).jpg", "image (50).jpg"];
-  const row1 = imageNames.slice(0, 15);
-  const row2 = imageNames.slice(15, 30);
-  const row3 = imageNames.slice(30, 50);
+
 
   // Register GSAP plugins
   gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
@@ -80,87 +75,11 @@ export default function Home(){
         </div>
         <div className='catalogue'>
           <h2>Design Catalogue</h2>
-          <div className='hanger-scene'>
-            
-          <div className='carousel-container'>
-            <div className='carousel-axis carousel-axis-r'>
-            {Array.from({ length: 15 }).map((_, index) => (
-              <div key={`post-${index}`} className='static-hanger-post' style={{
-                '--i': index,
-                '--total': 15,
-              } as React.CSSProperties}></div>
-            ))}
-            {/* We need 15 arms for Row 1 (15 cards) */}
-            {Array.from({ length: 15 }).map((_, index) => (
-              <div key={`arm-${index}`} className='hanger-arm' style={{
-                '--i': index,
-                '--total': 15,
-              } as React.CSSProperties}></div>
-            ))}    
-            {row1.map((image, index) => {
-              return(<Card key={index} background={image} style={{'--i': index, '--total': row1.length} as React.CSSProperties} />)
-            })}
-            </div>
-          </div>
-
-          <div className='carousel-container'>
-            <div className='carousel-axis carousel-axis-l'>
-            {Array.from({ length: 15 }).map((_, index) => (
-              <div key={`post-${index}`} className='static-hanger-post' style={{
-                '--i': index,
-                '--total': 15,
-              } as React.CSSProperties}></div>
-            ))}
-            {/* We need 15 arms for Row 1 (15 cards) */}
-            {Array.from({ length: 15 }).map((_, index) => (
-              <div key={`arm-${index}`} className='hanger-arm' style={{
-                '--i': index,
-                '--total': 15,
-              } as React.CSSProperties}></div>
-            ))}
-            {row2.map((image, index) => {
-              return(<Card key={index} background={image} style={{'--i': index, '--total': row1.length} as React.CSSProperties} />)
-            })}
-            </div>
-          </div>
-
-          <div className='carousel-container'>
-            <div className='carousel-axis carousel-axis-r'>
-            {Array.from({ length: 15 }).map((_, index) => (
-              <div key={`post-${index}`} className='static-hanger-post' style={{
-                '--i': index,
-                '--total': 15,
-              } as React.CSSProperties}></div>
-            ))}
-            {/* We need 15 arms for Row 1 (15 cards) */}
-            {Array.from({ length: 15 }).map((_, index) => (
-              <div key={`arm-${index}`} className='hanger-arm' style={{
-                '--i': index,
-                '--total': 15,
-              } as React.CSSProperties}></div>
-            ))}
-            {row3.map((image, index) => {
-              return(<Card key={index} background={image} style={{'--i': index, '--total': row1.length} as React.CSSProperties} />)
-            })}
-            </div>
-          </div>
-          </div>
-        </div>
-        <div>
-          <h2>Contact Me</h2>
-          <div className='links'>
-            <a href="http://wa.me/2349073788434?text=Hello%2C%20I%27m%20here%20from%20your%20portfolio%20website" target="_blank" rel="noopener noreferrer">
-               <WhatsAppIcon style={{width:"50px", height: "50px"}} />
-            </a>
-            <a href="http://wa.me/2349073788434?text=Hello%2C%20I%27m%20here%20from%20your%20portfolio%20website" target="_blank" rel="noopener noreferrer">
-               <InstagramIcon style={{width:"50px", height: "50px"}} />
-            </a>
-            <a href="http://wa.me/2349073788434?text=Hello%2C%20I%27m%20here%20from%20your%20portfolio%20website" target="_blank" rel="noopener noreferrer">
-               <LinkedInIcon style={{width:"50px", height: "50px"}} />
-            </a>
-          </div>
+          <Catalogue />
           
         </div>
+        <Contact />
+        
       </div>
   )
 }
