@@ -34,7 +34,7 @@ export default function Home(){
           amount: 0.5
       },
       ease: 'back.out(1.7)',
-      duration: 1.5,
+      duration: 2.5,
     });
 
     // Animate the tagline spans
