@@ -35,7 +35,7 @@ export default function Catalogue(){
     const rows = [
       { images: imageNames.slice(0, 15), direction: 'right' as const },
       { images: imageNames.slice(15, 30), direction: 'left' as const },
-      { images: imageNames.slice(30, 50), direction: 'right' as const },
+      { images: imageNames.slice(30, 45), direction: 'right' as const },
     ];
 
     return(
